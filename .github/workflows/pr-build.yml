@@ -8,6 +8,7 @@ on:
       - '**/Dockerfile'
       - '**/Makefile'
       - '.github/workflows/build-and-push.yml'
+      - '.github/workflows/pr-build.yml'
 
 jobs:
   build-test:
