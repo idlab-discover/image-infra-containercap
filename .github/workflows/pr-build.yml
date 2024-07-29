@@ -1,7 +1,7 @@
 name: Build and Push Container Images
 
 on:
-  push:
+  pull_request:
     branches:
       - "main"
     paths:
@@ -10,7 +10,7 @@ on:
       - '.github/workflows/build-and-push.yml'
 
 jobs:
-  build-and-push:
+  build-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,5 +27,5 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push images
-      run: make all
+    - name: Only build images
+      run: make build
