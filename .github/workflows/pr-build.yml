@@ -2,6 +2,7 @@ name: Test Build Container Images
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - "main"
     paths:
