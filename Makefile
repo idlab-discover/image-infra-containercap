@@ -1,4 +1,4 @@
-SUBDIRS := $(shell find . -type f -name "Makefile" -exec dirname {} \;)
+SUBDIRS := $(shell find . -mindepth 2 -type f -name "Makefile" -exec dirname {} \;)
 
 .PHONY: all $(SUBDIRS)
 
