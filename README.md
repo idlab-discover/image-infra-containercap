@@ -9,7 +9,8 @@ This directory provides as an overview of the container images used with ConCap.
 To build a single image, navigate to the respective subdirectory and run:
 
 ```sh
-docker build -t <image_name> .
+cd <subdirectory>
+make build
 ```
 
 ### Build All Images
@@ -17,7 +18,7 @@ docker build -t <image_name> .
 To automatically build all the images, run the following command:
 
 ```sh
-make all
+make build
 ```
 
 ## Contributing
