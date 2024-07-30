@@ -1,0 +1,3 @@
+[submodule "cicflowmeter/src"]
+	path = cicflowmeter/src
+	url = https://github.com/GintsEngelen/CICFlowMeter.git
