@@ -28,4 +28,4 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push images
-      run: make all
+      run: make build_push
