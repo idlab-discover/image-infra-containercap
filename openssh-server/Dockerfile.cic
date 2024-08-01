@@ -1,0 +1,30 @@
+# Use the official Ubuntu as a base image
+FROM ubuntu:16.04
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Copy the openssh-server package to the container
+COPY src/ /tmp/bin
+
+# Install OpenSSH server: openssh-server_7.2p2-4ubuntu2.2
+RUN apt-get update && apt-get -f install -y /tmp/bin/openssh-client_7.2p2-4ubuntu2.2_amd64.deb \
+    && apt-get -f install -y /tmp/bin/openssh-sftp-server_7.2p2-4ubuntu2.2_amd64.deb \
+    && apt-get -f install -y /tmp/bin/openssh-server_7.2p2-4ubuntu2.2_amd64.deb \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/bin
+
+# Create the SSH directory and set up keys (if needed)
+RUN mkdir /var/run/sshd
+
+# Copy the setup script to the container
+COPY --chmod=0755 config/password-setup.sh /usr/local/bin/setup.sh
+
+# Execute the setup script
+RUN /usr/local/bin/setup.sh iscxtap 1234
+
+# Expose SSH port
+EXPOSE 22
+
+# Start the SSH service
+CMD ["/usr/sbin/sshd", "-D"]
