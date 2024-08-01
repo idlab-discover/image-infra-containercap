@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Create a new user with a password
-USERNAME=${USERNAME:-user}
-PASSWORD=${PASSWORD:-1mp0ss1bl3P4ssw0rd!}
+USERNAME=${1:-user}
+PASSWORD=${2:-1mp0ss1bl3P4ssw0rd!}
 useradd -m -s /bin/bash "$USERNAME"
 echo "$USERNAME:$PASSWORD" | chpasswd
 

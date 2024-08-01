@@ -9,7 +9,8 @@ A minimal container image with openssh server starting from the ubuntu base imag
 
 This project contains multiple Dockerfiles for different configurations of an OpenSSH server. Each configuration is specified using different tags and configuration files.
 
-| Tag             | From                | Config              | Description                                         |
-|-----------------|---------------------|---------------------|-----------------------------------------------------|
-| password-16.04  | `ubuntu:16.04`      | `password-setup.sh` | Password authentication enabled, except for `root`. |
-| password-24.04  | `ubuntu:24.04`      | `password-setup.sh` | Password authentication enabled, except for `root`. |
+| Tag             | From                | Config              | Description                                                           |
+|-----------------|---------------------|---------------------|-----------------------------------------------------------------------|
+| password-16.04  | `ubuntu:16.04`      | `password-setup.sh` | Password authentication enabled, except for `root`.                   |
+| password-24.04  | `ubuntu:24.04`      | `password-setup.sh` | Password authentication enabled, except for `root`.                   |
+| cic             | `ubuntu:16.04`      | `password-setup.sh` | OpenSSH version `7.2p2-4ubuntu2.2`, replicated from CIC IDS datasets. |
