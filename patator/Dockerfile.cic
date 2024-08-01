@@ -1,0 +1,25 @@
+# Use the official Ubuntu as a base image
+FROM ubuntu:18.04
+
+# Install the required packages
+RUN apt update && apt install -y \
+    python3-pip git libcurl4-openssl-dev libmysqlclient-dev libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# Clone the Patator repository with 0.8 tag
+RUN git clone --depth 1 --branch 0.8 https://github.com/lanjelot/patator.git /opt/patator
+
+# Set the working directory
+WORKDIR /opt/patator
+
+# Install the required Python packages
+RUN sed -i "s/paramiko/paramiko==2.0.0/" requirements.txt \
+    && pip3 install -r /opt/patator/requirements.txt
+
+# Copy the wordlists for brute-force attacks
+COPY data/ /usr/share/wordlists
+
+# Set the entrypoint
+ENTRYPOINT ["python3", "./patator.py"]
+
