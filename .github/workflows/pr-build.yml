@@ -19,6 +19,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: 'true'
+        fetch-depth: 0  # Fetch all history for git diff
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
@@ -30,5 +31,18 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Get list of changed files
+      id: changes
+      run: |
+        echo "CHANGED_DIRS=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep 'Makefile' | xargs -I {} dirname {} | sort | uniq)" >> $GITHUB_ENV
+
     - name: Only build images
-      run: make build
+      run: |
+        for dir in $CHANGED_DIRS; do
+          if [ -f "$dir/Makefile" ]; then
+            echo "Running make in $dir"
+            (cd $dir && make build)
+          fi
+        done
+      env:
+        CHANGED_DIRS: ${{ env.CHANGED_DIRS }}

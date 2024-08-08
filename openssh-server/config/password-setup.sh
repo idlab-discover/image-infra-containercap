@@ -9,3 +9,4 @@ echo "$USERNAME:$PASSWORD" | chpasswd
 # Enable password authentication, except for root
 sed -i "s/^#\?PasswordAuthentication .*/PasswordAuthentication yes/" /etc/ssh/sshd_config
 sed -i "s/^#\?PermitRootLogin .*/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i "s/^#\?MaxStartups .*/MaxStartups 50:30:100/" /etc/ssh/sshd_config
